@@ -1,4 +1,5 @@
 require "plane"
 
-class Plane
+describe Plane do
+
 end
