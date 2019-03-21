@@ -1,5 +1,3 @@
-require "plane"
-
 class Plane
 
   attr_reader :landed
