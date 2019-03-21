@@ -8,7 +8,7 @@ class Airport
     @plane_list = []
   end
 
-  def land_plane(plane)
+  def land_plane(plane, _weather)
     @plane_list.push(plane)
   end
 
