@@ -27,9 +27,10 @@ describe Airport do
 
   describe "#take_off_plane" do
 
-    it "takes plane out of plane_list" do
+    it "takes plane out of plane_list when not stormy" do
+      allow(weather).to receive(:stormy) { true }
       @airport.land_plane(plane, weather)
-      @airport.take_off_plane
+      @airport.take_off_plane(weather)
       expect(@airport.plane_list).to eq([])
     end
 

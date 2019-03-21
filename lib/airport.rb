@@ -12,7 +12,7 @@ class Airport
     @plane_list.push(plane)
   end
 
-  def take_off_plane
+  def take_off_plane(_weather)
     @plane_list.pop
   end
 
