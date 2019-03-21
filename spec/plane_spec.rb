@@ -12,4 +12,11 @@ describe Plane do
     end
   end
 
+  describe "#land" do
+    it "starts off not landed" do
+      @plane.land
+      expect(@plane.landed).to eq(true)
+    end
+  end
+
 end
