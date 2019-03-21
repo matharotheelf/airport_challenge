@@ -3,6 +3,7 @@ require "airport"
 describe Airport do
 
   let(:plane) { double :plane }
+  let(:plane2) { double :plane2 }
   let(:weather) { double :weather }
 
   before do
@@ -28,6 +29,13 @@ describe Airport do
       allow(weather).to receive(:stormy) { true }
       @airport.land_plane(plane, weather)
       expect(@airport.plane_list).to eq([])
+    end
+
+    it "stops plane landing if airport full" do
+      allow(weather).to receive(:stormy) { false }
+      @airport.land_plane(plane, weather)
+      @airport.land_plane(plane2, weather)
+      expect(@airport.plane_list).to eq([plane])
     end
   end
 

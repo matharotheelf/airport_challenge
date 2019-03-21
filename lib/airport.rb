@@ -9,7 +9,7 @@ class Airport
   end
 
   def land_plane(plane, weather)
-    unless weather.stormy
+    if !weather.stormy && @plane_list.length < 1
       @plane_list.push(plane)
     end
   end
