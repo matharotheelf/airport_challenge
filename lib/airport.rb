@@ -9,7 +9,9 @@ class Airport
   end
 
   def land_plane(plane, _weather)
-    @plane_list.push(plane)
+    unless _weather.stormy
+      @plane_list.push(plane)
+    end
   end
 
   def take_off_plane(_weather)
