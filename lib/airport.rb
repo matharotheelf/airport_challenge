@@ -4,12 +4,13 @@ class Airport
 
   attr_reader :plane_list
 
-  def initialize
+  def initialize(capacity)
+    @capacity = capacity
     @plane_list = []
   end
 
   def land_plane(plane, weather)
-    if !weather.stormy && @plane_list.length < 1
+    if !weather.stormy && @plane_list.length < @capacity
       @plane_list.push(plane)
     end
   end

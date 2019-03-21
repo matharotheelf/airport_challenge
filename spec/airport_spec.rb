@@ -7,7 +7,8 @@ describe Airport do
   let(:weather) { double :weather }
 
   before do
-    @airport = Airport.new
+    @airport = Airport.new(1)
+    @airport2 = Airport.new(2)
   end
 
   describe "#plane_list" do
@@ -36,6 +37,13 @@ describe Airport do
       @airport.land_plane(plane, weather)
       @airport.land_plane(plane2, weather)
       expect(@airport.plane_list).to eq([plane])
+    end
+
+    it "airport has variable capacity and can take to planes" do
+      allow(weather).to receive(:stormy) { false }
+      @airport2.land_plane(plane, weather)
+      @airport2.land_plane(plane2, weather)
+      expect(@airport2.plane_list).to eq([plane, plane2])
     end
   end
 
