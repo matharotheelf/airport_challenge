@@ -12,4 +12,13 @@ describe Airport do
       expect(@airport.plane_list).to eq([])
     end
   end
+
+  describe "#land_plane" do
+    let(:plane) { double :plane }
+
+    it "adds plane to plane_list" do
+      @airport.land_plane(plane)
+      expect(@airport.plane_list).to eq([plane])
+    end
+  end
 end
