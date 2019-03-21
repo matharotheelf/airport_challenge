@@ -46,5 +46,10 @@ describe Airport do
       expect(@airport.plane_list).to eq([])
     end
 
+    it "does not allow takeoff when stormy" do
+      allow(weather2).to receive(:stormy) { true }
+      @airport.take_off_plane(weather2)
+      expect(@airport.plane_list).to eq([plane])
+    end
   end
 end

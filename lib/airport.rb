@@ -8,14 +8,16 @@ class Airport
     @plane_list = []
   end
 
-  def land_plane(plane, _weather)
-    unless _weather.stormy
+  def land_plane(plane, weather)
+    unless weather.stormy
       @plane_list.push(plane)
     end
   end
 
-  def take_off_plane(_weather)
-    @plane_list.pop
+  def take_off_plane(weather)
+    unless weather.stormy
+      @plane_list.pop
+    end
   end
 
 end
