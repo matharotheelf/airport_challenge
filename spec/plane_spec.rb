@@ -13,9 +13,17 @@ describe Plane do
   end
 
   describe "#land" do
-    it "starts off not landed" do
+    it "lands plane" do
       @plane.land
       expect(@plane.landed).to eq(true)
+    end
+  end
+
+  describe "#takeoff" do
+    it "makes plane take off" do
+      @plane.land
+      @plane.takeoff
+      expect(@plane.landed).to eq(false)
     end
   end
 
