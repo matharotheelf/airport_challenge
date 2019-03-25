@@ -50,6 +50,13 @@ describe Airport do
       @airport2.land_plane(plane2, weather)
       expect(@airport2.plane_list).to eq([plane, plane2])
     end
+
+    it "can not land plane to airport if already landed" do
+      allow(weather).to receive(:stormy) { false }
+      allow(plane).to receive(:landed) { true }
+      @airport.land_plane(plane, weather)
+      expect(@airport.plane_list).to eq([])
+    end
   end
 
   describe "#take_off_plane" do
