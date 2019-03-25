@@ -17,8 +17,9 @@ class Airport
   end
 
   def take_off_plane(weather)
-    unless weather.stormy
-      @plane_list.pop
+    unless weather.stormy || @plane_list.length == 0 
+      plane = @plane_list.pop
+      plane.takeoff
     end
   end
 

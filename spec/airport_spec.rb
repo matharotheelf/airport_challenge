@@ -78,6 +78,7 @@ describe Airport do
 
     before do
       allow(plane).to receive(:land)
+      allow(plane).to receive(:takeoff)
       allow(weather).to receive(:stormy) { false }
       allow(plane).to receive(:landed) { false }
       @airport.land_plane(plane, weather)
@@ -102,5 +103,10 @@ describe Airport do
       expect(@airport.plane_list).to eq([plane])
     end
 
+    it "removing plane from airport list changes plane status to not landed" do
+      allow(weather2).to receive(:stormy) { false }
+      @airport.take_off_plane(weather2)
+      expect(plane).to have_received(:takeoff)
+    end
   end
 end
