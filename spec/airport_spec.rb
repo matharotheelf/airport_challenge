@@ -22,18 +22,21 @@ describe Airport do
 
     it "adds plane to plane_list when not stormy" do
       allow(weather).to receive(:stormy) { false }
+      allow(plane).to receive(:landed) { false }
       @airport.land_plane(plane, weather)
       expect(@airport.plane_list).to eq([plane])
     end
 
     it "stops plane landing if stormy" do
       allow(weather).to receive(:stormy) { true }
+      allow(plane).to receive(:landed) { false }
       @airport.land_plane(plane, weather)
       expect(@airport.plane_list).to eq([])
     end
 
     it "stops plane landing if airport full" do
       allow(weather).to receive(:stormy) { false }
+      allow(plane).to receive(:landed) { false }
       @airport.land_plane(plane, weather)
       @airport.land_plane(plane2, weather)
       expect(@airport.plane_list).to eq([plane])
@@ -41,6 +44,8 @@ describe Airport do
 
     it "airport has variable capacity and can take to planes" do
       allow(weather).to receive(:stormy) { false }
+      allow(plane).to receive(:landed) { false }
+      allow(plane2).to receive(:landed) { false }
       @airport2.land_plane(plane, weather)
       @airport2.land_plane(plane2, weather)
       expect(@airport2.plane_list).to eq([plane, plane2])
@@ -53,7 +58,15 @@ describe Airport do
 
     before do
       allow(weather).to receive(:stormy) { false }
+      allow(plane).to receive(:landed) { false }
       @airport.land_plane(plane, weather)
+    end
+
+    it "does not allow take off from empty airport" do
+      allow(weather2).to receive(:stormy) { false }
+      @airport.take_off_plane(weather2)
+      @airport.take_off_plane(weather2)
+      expect(@airport.plane_list).to eq([])
     end
 
     it "takes plane out of plane_list when not stormy" do
@@ -67,5 +80,6 @@ describe Airport do
       @airport.take_off_plane(weather2)
       expect(@airport.plane_list).to eq([plane])
     end
+
   end
 end
