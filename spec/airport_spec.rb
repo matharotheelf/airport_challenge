@@ -20,6 +20,11 @@ describe Airport do
 
   describe "#land_plane" do
 
+    before do
+      allow(plane).to receive(:land)
+      allow(plane2).to receive(:land)
+    end
+
     it "adds plane to plane_list when not stormy" do
       allow(weather).to receive(:stormy) { false }
       allow(plane).to receive(:landed) { false }
@@ -57,6 +62,14 @@ describe Airport do
       @airport.land_plane(plane, weather)
       expect(@airport.plane_list).to eq([])
     end
+
+    it "plane becomes landed when added to plane list" do
+      allow(weather).to receive(:stormy) { false }
+      allow(plane).to receive(:landed) { false }
+      @airport.land_plane(plane, weather)
+      expect(plane).to have_received(:land)
+    end
+
   end
 
   describe "#take_off_plane" do
@@ -64,6 +77,7 @@ describe Airport do
     let(:weather2) { double :weather2 }
 
     before do
+      allow(plane).to receive(:land)
       allow(weather).to receive(:stormy) { false }
       allow(plane).to receive(:landed) { false }
       @airport.land_plane(plane, weather)
